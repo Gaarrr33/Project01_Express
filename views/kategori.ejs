@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Pengguna</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Data Pengguna</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td>1</td>
+                        <td>Andi</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning"
+                                onclick="openEdit(0)">Edit</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openDelete(0)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Budi</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning"
+                                onclick="openEdit(1)">Edit</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openDelete(1)">Delete</button>
+                        </td>
+                    </tr><tr>
+                        <td>3</td>
+                        <td>Agus</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning"
+                                onclick="openEdit(1)">Edit</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openDelete(1)">Delete</button>
+                        </td>
+                    </tr><tr>
+                        <td>4</td>
+                        <td>Yono</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning"
+                                onclick="openEdit(1)">Edit</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openDelete(1)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- OFFCANVAS -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="actionCanvas">
+    <div class="offcanvas-header">
+        <h5 id="canvasTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body" id="canvasBody">
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let selectedIndex = null;
+    const offcanvas = new bootstrap.Offcanvas(document.getElementById('actionCanvas'));
+
+    function openEdit(index) {
+        selectedIndex = index;
+        let row = document.querySelectorAll("#tableBody tr")[index];
+        let nama = row.cells[1].innerText;
+
+        document.getElementById("canvasTitle").innerText = "Edit Data";
+        document.getElementById("canvasBody").innerHTML = `
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" id="editNama" class="form-control" value="${nama}">
+            </div>
+            <button class="btn btn-success w-100" onclick="saveEdit()">Simpan Perubahan</button>
+        `;
+
+        offcanvas.show();
+    }
+
+    function openDelete(index) {
+        selectedIndex = index;
+
+        document.getElementById("canvasTitle").innerText = "Hapus Data";
+        document.getElementById("canvasBody").innerHTML = `
+            <div class="alert alert-danger">
+                Yakin ingin menghapus data ini?
+            </div>
+            <button class="btn btn-danger w-100" onclick="confirmDelete()">Hapus</button>
+        `;
+
+        offcanvas.show();
+    }
+
+    function saveEdit() {
+        let newNama = document.getElementById("editNama").value;
+        let row = document.querySelectorAll("#tableBody tr")[selectedIndex];
+        row.cells[1].innerText = newNama;
+        offcanvas.hide();
+    }
+
+    function confirmDelete() {
+        let row = document.querySelectorAll("#tableBody tr")[selectedIndex];
+        row.remove();
+        offcanvas.hide();
+    }
+</script>
+
+</body>
+</html>
