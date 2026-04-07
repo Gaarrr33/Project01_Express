@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Kategori</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .btn-success { border-radius: 8px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href="/kategori" class="btn btn-secondary mb-3">← Kembali</a>
+
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Form Tambah Kategori</h5>
+                </div>
+                <div class="card-body">
+                    <form action="/kategori/store" method="POST">
+                        <div class="mb-4">
+                            <label for="nama" class="form-label fw-bold">Nama Kategori</label>
+                            <input type="text" class="form-control" name="nama_kategori" 
+                                   id="nama" placeholder="Masukkan nama kategori baru..." required>
+                            <div class="form-text">Pastikan nama kategori belum pernah ada sebelumnya.</div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success fw-bold">
+                                Simpan Data
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
