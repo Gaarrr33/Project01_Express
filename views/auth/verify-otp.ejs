@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi OTP - FinStock</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #25D366 0%, #128C7E 50%, #667eea 100%);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #25D366;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .welcome-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.3rem;
+        }
+
+        .welcome-text p {
+            color: #718096;
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        .otp-input-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .otp-input {
+            width: 100%;
+            text-align: center;
+            letter-spacing: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 0.8rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            background: #f7fafc;
+            color: #2d3748;
+            transition: all 0.3s;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: #25D366;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: #4a5568;
+            font-size: 0.88rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.35);
+        }
+
+        .timer-badge {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #e53e3e;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 0.88rem;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-error {
+            background-color: #fff5f5;
+            color: #e53e3e;
+            border: 1px solid #feb2b2;
+        }
+
+        .alert-success {
+            background-color: #f0fff4;
+            color: #276749;
+            border: 1px solid #9ae6b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <h1>Verifikasi OTP</h1>
+        </div>
+
+        <div class="welcome-text">
+            <h2>Masukkan Kode OTP</h2>
+            <p>Kode 6 digit telah dikirimkan ke WhatsApp Anda. Kode ini berlaku selama 5 menit.</p>
+        </div>
+
+        <% if (messages && messages.error) { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span><%= messages.error %></span>
+            </div>
+        <% } %>
+
+        <% if (messages && messages.success) { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span><%= messages.success %></span>
+            </div>
+        <% } %>
+
+        <div class="timer-badge">
+            <i class="fas fa-clock"></i>
+            <span>Maksimal 3 kali percobaan salah</span>
+        </div>
+
+        <form action="/verify-otp" method="POST">
+            <input type="hidden" name="email" value="<%= email %>">
+            <input type="hidden" name="phone" value="<%= phone %>">
+
+            <div class="form-group">
+                <label for="otp">Kode OTP (6 Digit)</label>
+                <div class="otp-input-wrapper">
+                    <input 
+                        type="text" 
+                        name="otp" 
+                        id="otp" 
+                        class="otp-input" 
+                        placeholder="••••••" 
+                        maxlength="6"
+                        pattern="\d{6}"
+                        required
+                        autofocus
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Password Baru</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="password" 
+                        name="newPassword" 
+                        id="newPassword" 
+                        class="form-input" 
+                        placeholder="Minimal 6 karakter"
+                        required
+                    >
+                    <i class="fas fa-lock input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password Baru</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="password" 
+                        name="confirmPassword" 
+                        id="confirmPassword" 
+                        class="form-input" 
+                        placeholder="Ulangi password baru"
+                        required
+                    >
+                    <i class="fas fa-check-double input-icon"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Simpan Password Baru
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="/forgot-password"><i class="fas fa-redo"></i> Minta Kode OTP Baru</a>
+            <br>
+            <a href="/login" style="margin-top: 8px; display: inline-block;">Kembali ke Login</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Kategori</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+
+          <% if (typeof messages !== 'undefined' && messages.success) { %>
+                <div class="alert alert-info" role="alert">
+                    <%= messages.success %>
+                </div>
+            <% } %>
+
+            <a href="/kategori/create" class="btn btn-sm btn-success mb-3">Tambah</a>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col" colspan="2">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < data.length; i++) { %>
+                        <tr>
+                            <th scope="row"><%= i + 1 %></th>
+                            <td><%= data[i].Nama_kategori %></td>
+                            <td>
+                                <a href="/kategori/edit/<%= data[i].id_kategori %>" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="/kategori/delete/<%= data[i].id_kategori %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

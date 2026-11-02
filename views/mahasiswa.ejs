@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daftar Mahasiswa</title>
+<style>
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: #f7f7f7;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+a.button:hover {
+  background: #45a049;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background: #4CAF50;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+tr:hover {
+  background: #e0f0d9;
+}
+
+img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+
+<h1>Daftar Mahasiswa</h1>
+<a href="/mahasiswa/tambah" class="button">Tambah Mahasiswa</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Foto</th>
+      <th>Nama</th>
+      <th>Jenis Kelamin</th>
+      <th>Alamat</th>
+      <th>Hobi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% let no = 1; %>
+    <% data.forEach(mhs => { %>
+    <tr>
+      <td><%= no++ %></td>
+      <td><img src="/uploads/<%= mhs.foto %>" alt="Foto"></td>
+      <td><%= mhs.nama %></td>
+      <td><%= mhs.jenis_kelamin %></td>
+      <td><%= mhs.alamat %></td>
+      <td><%= mhs.hobi %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+</body>
+</html>

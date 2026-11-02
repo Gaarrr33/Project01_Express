@@ -1,0 +1,20 @@
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: waha_core
+    restart: unless-stopped
+    environment:
+      # Keamanan API & Dashboard WAHA Core
+      - WHATSAPP_API_KEY=${WAHA_API_KEY}
+      - WAHA_DASHBOARD_USERNAME=${WAHA_DASHBOARD_USERNAME}
+      - WAHA_DASHBOARD_PASSWORD=${WAHA_DASHBOARD_PASSWORD}
+      - WAHA_LOG_LEVEL=info
+      # Engine default WAHA Core
+      - WHATSAPP_DEFAULT_ENGINE=WEBJS
+    ports:
+      # PENTING: Bind HANYA ke 127.0.0.1 (localhost) agar tidak terekspos ke publik/jaringan lokal
+      # Port internal 3000 dipetakan ke 3008 host agar tidak bentrok dengan server Express (port 3000)
+      - "127.0.0.1:3008:3000"
+    volumes:
+      # Persistent volume untuk menyimpan sesi login WhatsApp
+      - ./waha-sessions:/app/.sessions

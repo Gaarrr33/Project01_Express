@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tambah Mahasiswa</title>
+<style>
+* { box-sizing: border-box; font-family: Arial; }
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 400px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #667eea;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #667eea;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+.file-input {
+  background: #f9f9f9;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Tambah Mahasiswa</h2>
+
+  <form action="/mahasiswa/tambah" method="POST" enctype="multipart/form-data">
+    
+    <label>Foto</label>
+    <input type="file" name="foto" class="file-input" required>
+
+    <label>Nama</label>
+    <input type="text" name="nama" placeholder="Masukkan nama" required>
+
+    <label>Jenis Kelamin</label>
+    <select name="jk" required>
+      <option value="">Pilih</option>
+      <option value="Laki-laki">Laki-laki</option>
+      <option value="Perempuan">Perempuan</option>
+    </select>
+
+    <label>Alamat</label>
+    <input type="text" name="alamat" placeholder="Masukkan alamat" required>
+
+    <label>Hobi</label>
+    <input type="text" name="hobi" placeholder="Masukkan hobi" required>
+
+    <button type="submit">Simpan</button>
+  </form>
+</div>
+
+</body>
+</html>
