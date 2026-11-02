@@ -170,3 +170,4 @@ Pesan pemulihan yang diterima oleh Administrator di WhatsApp:
 
 4. **Kestabilan Alerting (State Machine & Threshold):**  
    Dengan menerapkan batas toleransi 2x ping gagal dan pelacakan state transisi status, sistem berhasil mencegah *false alarm* saat restart serta meniadakan *spamming* notifikasi pada administrator.
+

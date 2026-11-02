@@ -2,7 +2,7 @@
 
 Aplikasi backend Node.js & Express.js yang dilengkapi dengan katalog etalase produk, autentikasi pengguna, integrasi notifikasi WhatsApp Gateway menggunakan Docker WAHA Core, serta sistem monitoring ketersediaan server eksternal (*External Watchdog*).
 
-> 📄 **Laporan Lengkap Praktikum:** Silakan baca dokumen [LAPORAN_PRAKTIKUM.md](./LAPORAN_PRAKTIKUM.md) untuk dokumentasi lengkap dan tangkapan layar pengujian.
+> 📄 **Laporan Lengkap Praktikum:** Tersedia dalam format PDF [**LAPORAN_PRAKTIKUM.pdf**](./LAPORAN_PRAKTIKUM.pdf) dan Markdown [**LAPORAN_PRAKTIKUM.md**](./LAPORAN_PRAKTIKUM.md) lengkap beserta analisis teknis dan tangkapan layar pengujian.
 
 ---
 
@@ -61,3 +61,4 @@ npm run watchdog
 ## 📸 Dokumentasi & Hasil Pengujian
 
 Seluruh tangkapan layar hasil pengujian tersimpan pada direktori [`docs/screenshots/`](./docs/screenshots/) dan dirangkum secara mendalam di [LAPORAN_PRAKTIKUM.md](./LAPORAN_PRAKTIKUM.md).
+
